@@ -20,8 +20,8 @@ const useLeagues = () => {
   return {
     isLoading,
     leagues,
-    getLeagueById: ( id ) => {
-      if(id) router.push({ name: 'LeagueTeams', params: { id } })
+    getLeagueById: ( {id, name} ) => {
+      if(id) router.push({ name: 'LeagueTeams', params: { id, name } })
     }
   }
 }

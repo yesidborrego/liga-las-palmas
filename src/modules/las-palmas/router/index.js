@@ -12,7 +12,21 @@ export default {
       name: 'LeagueTeams',
       component: () => import(/* webpackChunkName:'league-eams-entry' */ '@/modules/las-palmas/views/LeagueTeams.vue'),
       props: (route) => {
-        return {id: route.params.id}
+        return {
+          id: route.params.id,
+          name: route.params.name
+        }
+      }
+    },
+    {
+      path: '/teams/:id/players',
+      name: 'TeamsPlayers',
+      component: () => import(/* webpackChunkName:'league-eams-entry' */ '@/modules/las-palmas/views/TeamsPlayers.vue'),
+      props: (route) => {
+        return {
+          id: route.params.id,
+          name: route.params.name
+        }
       }
     },
     {

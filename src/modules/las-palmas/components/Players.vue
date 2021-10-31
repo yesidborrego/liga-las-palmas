@@ -5,8 +5,8 @@
     <div class="mb-2 text-center capitalize">
       <ButtonVue
         :data="name"
-        textBtn="Ver equipos"
-        @click.self="$emit('getLeagueById', { id, name })"
+        textBtn="Ver jugadores"
+        @click.self="$emit('getTeamsById', { id, name })"
       />
     </div>
   </div>
@@ -17,19 +17,19 @@
   import ButtonVue from './Button.vue'
 
   export default {
-    name: 'LeagueList',
+    name: 'TeamsList',
     props: {
-      league: {
+      team: {
           type: Object,
           required: true
       },
     },
-    emits: ["getLeagueById"],
+    emits: ["getTeamsById"],
     components: {
       ButtonVue
     },
     setup(props) {
-      const { id, "Logo de la Liga": logo, "Nombre De La Liga": name } = toRefs(props.league);
+      const { id, "Logo del Equipo": logo, "Nombre del equipo": name } = toRefs(props.team);
       return {
         id,
         logo,
