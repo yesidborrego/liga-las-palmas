@@ -40,8 +40,8 @@
     content: '';
   }
   .loader:after {
-    /* background: #ffffff; */
-    background: #f3f4f6;
+    background: #ffffff;
+    /* background: #f3f4f6; */
     width: 75%;
     height: 75%;
     border-radius: 50%;

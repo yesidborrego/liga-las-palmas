@@ -6,7 +6,7 @@
           class="mx-3"
           v-for="(team) in teams" :key="team.id"
         >
-          <TeamsList :team="team" @getTeamsById="getTeamsById"/>
+          <Team :team="team" @getTeamsById="getTeamsById"/>
         </div>
       </template>
       <template v-else>
@@ -22,7 +22,7 @@
   import { defineProps } from 'vue'
   import useLeagueTeams from "../composables/useLeagueTeams"
   import spinner from "@/components/spinner.vue"
-  import TeamsList from "../components/TeamsList.vue"
+  import Team from "../components/Team.vue"
   import Pagination from "../components/Pagination.vue"
 
   const props = defineProps({

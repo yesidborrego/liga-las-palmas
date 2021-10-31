@@ -5,7 +5,7 @@ export default {
     {
       path: '/leagues',
       name: 'Leagues',
-      component: () => import(/* webpackChunkName: "leagues" */ '@/modules/las-palmas/views/League.vue')
+      component: () => import(/* webpackChunkName: "leagues" */ '@/modules/las-palmas/views/Leagues.vue')
     },
     {
       path: '/leagues/teams',
@@ -19,7 +19,7 @@ export default {
       }
     },
     {
-      path: '/teams/:id/players',
+      path: '/teams/players',
       name: 'TeamsPlayers',
       component: () => import(/* webpackChunkName:'league-eams-entry' */ '@/modules/las-palmas/views/TeamsPlayers.vue'),
       props: (route) => {
@@ -32,12 +32,12 @@ export default {
     {
       path: '/teams',
       name: 'Teams',
-      component: () => import(/* webpackChunkName: "teams" */ '@/modules/las-palmas/views/Team.vue')
+      component: () => import(/* webpackChunkName: "teams" */ '@/modules/las-palmas/views/Teams.vue')
     },
     {
       path: '/players',
       name: 'Players',
-      component: () => import(/* webpackChunkName: "players" */ '@/modules/las-palmas/views/Player.vue')
+      component: () => import(/* webpackChunkName: "players" */ '@/modules/las-palmas/views/Players.vue')
     },
   ]
 }

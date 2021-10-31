@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 px-4 py-4 flex items-center border-t border-gray-200">
+  <div class="px-4 py-4 flex items-center border-t border-gray-200">
     <div class="flex-1 flex justify-between">
       <div>
         <p class="text-xs inline-flex items-center text-gray-500">Mostrando {{ page }} de 2 páginas</p>

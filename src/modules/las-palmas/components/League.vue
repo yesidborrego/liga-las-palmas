@@ -1,8 +1,8 @@
 <template>
-  <div id="whoobe-swr0n" class="p-4 mx-4 mt-5 bg-white w-full md:w-56 justify-center items-center shadow px-6 flex flex-col">
+  <div class="p-4 mx-4 mt-5 bg-white w-full md:w-56 justify-center items-center hover:shadow-xl px-6 flex flex-col">
     <img :src="logo" alt="img" title="img" class="rounded-full h-20 w-20 object-cover">
     <h4 class="mt-3 border-b-2 border-gray-300 mb-4">{{ name }}</h4>
-    <div class="mb-2 text-center capitalize">
+    <div class="mb-2 text-center">
       <ButtonVue
         :data="name"
         textBtn="Ver equipos"
@@ -17,7 +17,7 @@
   import ButtonVue from './Button.vue'
 
   export default {
-    name: 'LeagueList',
+    name: 'League',
     props: {
       league: {
           type: Object,

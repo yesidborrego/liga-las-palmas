@@ -10,9 +10,14 @@ const useLeagues = () => {
 
   const getLeagues = async () => {
     isLoading.value = true
-    const { data } = await laspalmasApi.get('/leagues')
-    leagues.value = data
-    isLoading.value = false
+    try {
+      const { data } = await laspalmasApi.get('/leagues')
+      leagues.value = data
+      isLoading.value = false
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   getLeagues()

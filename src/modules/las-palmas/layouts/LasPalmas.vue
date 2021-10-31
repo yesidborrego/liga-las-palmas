@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div class="md:container md:mx-auto bg-gray-100">
+  <div class="md:container md:mx-auto">
     <router-view/>
   </div>
 </template>

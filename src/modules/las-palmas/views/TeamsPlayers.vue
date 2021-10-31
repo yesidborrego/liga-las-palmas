@@ -1,15 +1,13 @@
 <template>
-  <p>TamsPlayer Page</p>
-  <p>id: {{ id }}</p>
-  <p>Name: {{ name }}</p>
-      <!-- <h1 class="text-3xl font-bold text-red-500 my-3 text-center">Listado de equipos de: {{ nameLeague }}</h1>
-      <div class="flex flex-wrap justify-center w-full mt-3 mb-5">
+      <h1 class="text-3xl font-bold text-red-500 my-3 text-center">Listado de jugadores de: {{ nameTeam }}</h1>
+      <div class="flex flex-wrap justify-center w-full mt-3 mb-5 h-full">
         <template v-if="!isLoading">
           <div
             class="mx-3"
-            v-for="(team) in teams" :key="team.id"
+            v-for="(player) in players" :key="player.id"
           >
-            <TeamsList :team="team" @getLeagueById="getLeagueById"/>
+            <Player :player="player" />
+            <!-- <Player :player="player" @getLeagueById="getLeagueById"/> -->
           </div>
         </template>
         <template v-else>
@@ -18,15 +16,15 @@
           </div>
         </template>
       </div>
-      <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" /> -->
+      <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" />
 </template>
 
 <script>
-  // import spinner from "@/components/spinner.vue"
-  // import { reactive, ref } from "vue"
-  // import laspalmasApi from "@/api/lasPalmas"
-  // import TeamsList from "../components/TeamsList.vue"
-  // import Pagination from "../components/Pagination.vue"
+  import spinner from "@/components/spinner.vue"
+  import { reactive, ref } from "vue"
+  import laspalmasApi from "@/api/lasPalmas"
+  import Player from "../components/Player.vue"
+  import Pagination from "../components/Pagination.vue"
 
   export default {
     name: 'TeamsPlayers',
@@ -40,62 +38,61 @@
         required: true
       }
     },
-//     components: {
-//     spinner,
-//     TeamsList,
-//     Pagination
-// },
-//     setup(props) {
-//       const teams = ref([])
-//       const isLoading = ref(false)
-//       const idLeague = ref(null)
-//       const nameLeague = ref(null)
-//       const pagination = reactive({
-//         page: 1,
-//         limit: 5
-//       })
+    components: {
+      spinner,
+      Player,
+      Pagination
+    },
+    setup(props) {
+      const players = ref([])
+      const isLoading = ref(false)
+      const idTeam = ref(null)
+      const nameTeam = ref(null)
+      const pagination = reactive({
+        page: 1,
+        limit: 5
+      })
 
-//       const getTeams = async () => {
-//         isLoading.value = true
-//         idLeague.value = localStorage.getItem('leagueId')
-//         nameLeague.value = localStorage.getItem('leagueName')
-//         if(props.id) {
-//           localStorage.setItem('leagueId', props.id)
-//           localStorage.setItem('leagueName', props.name)
-//           idLeague.value = props.id
-//         }
-//         const { data } = await laspalmasApi.get(`/leagues/${idLeague.value}/teams?_limit=${pagination.limit}&_page=${pagination.page}`)
-//         teams.value = data
-//         isLoading.value = false
-//       }
+      const getPlayers = async () => {
+        isLoading.value = true
+        idTeam.value = localStorage.getItem('teamId')
+        nameTeam.value = localStorage.getItem('teamName')
+        if(props.id) {
+          localStorage.setItem('teamId', props.id)
+          localStorage.setItem('teamName', props.name)
+          idTeam.value = props.id
+          nameTeam.value = props.name
+        }
+        const { data } = await laspalmasApi.get(`/teams/${idTeam.value}/players?_limit=${pagination.limit}&_page=${pagination.page}`)
+        players.value = data
+        isLoading.value = false
+      }
 
-//       const prevPage = () => {
-//         if(pagination.page > 1) {
-//           pagination.page = pagination.page - 1
-//           getTeams()
-//         }
-//       }
+      const prevPage = () => {
+        if(pagination.page > 1) {
+          pagination.page = pagination.page - 1
+          getPlayers()
+        }
+      }
 
-//       const nextPage = () => {
-//           if (pagination.page !== 2) {
-//             pagination.page = pagination.page + 1
-//             getTeams()
-//           }
-//       }
+      const nextPage = () => {
+          if (pagination.page !== 3) {
+            pagination.page = pagination.page + 1
+            getPlayers()
+          }
+      }
 
+      getPlayers()
 
-//       getTeams()
+      return {
+        nameTeam,
+        players,
+        isLoading,
+        pagination,
 
-//       return {
-//         nameLeague,
-//         teams,
-//         isLoading,
-//         pagination,
-
-//         prevPage,
-//         nextPage
-//       }
-
-//     }
+        prevPage,
+        nextPage
+      }
+    }
   }
 </script>

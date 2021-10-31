@@ -6,7 +6,7 @@
         class="mx-3"
         v-for="(league) in leagues" :key="league.id"
       >
-        <LeagueList :league="league" @getLeagueById="getLeagueById"/>
+        <League :league="league" @getLeagueById="getLeagueById"/>
       </div>
     </template>
     <template v-else>
@@ -19,7 +19,7 @@
 
 <script setup>
   import spinner from '@/components/spinner.vue'
-  import LeagueList from '../components/LeagueList.vue'
+  import League from '../components/League.vue'
   import useLeagues from '../composables/useLeagues';
 
   const {

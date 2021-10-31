@@ -23,9 +23,14 @@ const useLeagueTeams = ({ id, name }) => {
       idLeague.value = id
       nameLeague.value = name
     }
-    const { data } = await laspalmasApi.get(`/leagues/${idLeague.value}/teams?_limit=${pagination.limit}&_page=${pagination.page}`)
-    teams.value = data
-    isLoading.value = false
+    try {
+      const { data } = await laspalmasApi.get(`/leagues/${idLeague.value}/teams?_limit=${pagination.limit}&_page=${pagination.page}`)
+      teams.value = data
+      isLoading.value = false
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const prevPage = () => {
