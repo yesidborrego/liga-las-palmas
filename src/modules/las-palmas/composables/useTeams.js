@@ -2,7 +2,8 @@ import { computed, onMounted, reactive, ref } from "vue"
 import { v4 as uuid } from 'uuid'
 import { useRouter } from "vue-router"
 
-import laspalmasApi from "../../../api/lasPalmas"
+import laspalmasApi from "@/api/lasPalmas"
+import { swalIcon, showSweetAlert } from "@/helpers/sweetAlert"
 
 const useTeams = () => {
   const router      = useRouter()
@@ -23,8 +24,11 @@ const useTeams = () => {
   })
 
   const getLeagues = async () => {
-    const { data: dataLeagues } = await laspalmasApi.get('/leagues')
-    leagues.value = dataLeagues
+    const { data } = await laspalmasApi.get('/leagues')
+    data.map(league => {
+      league.name = league['Nombre De La Liga']
+    })
+    leagues.value = data
   }
 
   const getTeams = async () => {
@@ -36,6 +40,7 @@ const useTeams = () => {
 
     } catch (error) {
       console.log(error)
+      showSweetAlert(swalIcon.error, error)
     }
   }
 
@@ -67,14 +72,18 @@ const useTeams = () => {
         if(textAction.btnForm === 'Agregar') {
           payload.id = uuid()
           await laspalmasApi.post('/teams', payload)
+          showSweetAlert(swalIcon.ok, 'Agregado')
         } else {
           payload.id = teamModel.teamId
           await laspalmasApi.put(`/teams/${payload.id}`, payload)
+          showSweetAlert(swalIcon.ok, 'Editado')
         }
         getTeams()
         clearInputs()
+
       } catch (error) {
         console.log(error)
+        showSweetAlert(swalIcon.error, error)
       }
     }
   }

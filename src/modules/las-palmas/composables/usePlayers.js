@@ -2,6 +2,7 @@ import { onMounted, reactive, ref } from "vue"
 import { v4 as uuid } from 'uuid'
 
 import laspalmasApi from "@/api/lasPalmas"
+import { swalIcon, showSweetAlert } from "@/helpers/sweetAlert"
 
 const usePlayers = () => {
   const teams       = ref([])
@@ -43,6 +44,7 @@ const usePlayers = () => {
       isLoading.value = false
     } catch (error) {
       console.log(error)
+      showSweetAlert(swalIcon.error, error)
     }
   }
 
@@ -64,15 +66,18 @@ const usePlayers = () => {
         if(textAction.btnForm === 'Agregar') {
           payload.id = uuid()
           await laspalmasApi.post('/players', payload)
+          showSweetAlert(swalIcon.ok, 'Agregado')
         } else {
           payload.id = playerForm.playerId
           await laspalmasApi.put(`/players/${payload.id}`, payload)
+          showSweetAlert(swalIcon.ok, 'Editado')
         }
         getPlayers(urlRequest.value)
         clearInputs()
 
       } catch (error) {
         console.log(error)
+        showSweetAlert(swalIcon.error, error)
       }
     }
   }
