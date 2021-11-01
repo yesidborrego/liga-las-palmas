@@ -6,7 +6,7 @@
           class="mx-3"
           v-for="(team) in teams" :key="team.id"
         >
-          <Team :team="team" @getTeamsById="getTeamsById"/>
+          <Team :team="team" @goTeamsPlayers="goTeamsPlayers" :isEditabled="isEditabled" />
         </div>
       </template>
       <template v-else>
@@ -15,7 +15,7 @@
         </div>
       </template>
     </div>
-    <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" />
+    <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" :totalPage="pagination.totalPage" />
 </template>
 
 <script setup>
@@ -34,9 +34,10 @@
     teams,
     isLoading,
     pagination,
+    isEditabled,
 
     prevPage,
     nextPage,
-    getTeamsById
+    goTeamsPlayers
   } = useLeagueTeams(props)
 </script>

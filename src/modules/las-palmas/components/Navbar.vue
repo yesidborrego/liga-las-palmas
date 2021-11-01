@@ -1,7 +1,6 @@
 <template>
   <nav class="flex items-center justify-between flex-wrap bg-blue-500 px-6 py-2">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
-      <!-- <img class="w-12 h-12 object-cover rounded-full" src="@/assets/escudo.png"> -->
       <img class="w-12 h-12 object-cover rounded-full" src="../../../assets/escudo.png">
       <span class="font-semibold text-xl tracking-tight">LLP</span>
     </div>

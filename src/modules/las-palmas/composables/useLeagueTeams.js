@@ -8,9 +8,11 @@ const useLeagueTeams = ({ id, name }) => {
   const isLoading = ref(false)
   const idLeague = ref(null)
   const nameLeague = ref(null)
+  const isEditabled = ref(false)
   const pagination = reactive({
     page: 1,
-    limit: 5
+    limit: 5,
+    totalPage: 2
   })
 
   const getTeams = async () => {
@@ -41,7 +43,7 @@ const useLeagueTeams = ({ id, name }) => {
   }
 
   const nextPage = () => {
-      if (pagination.page !== 2) {
+      if (pagination.page < pagination.totalPage) {
         pagination.page = pagination.page + 1
         getTeams()
       }
@@ -54,10 +56,11 @@ const useLeagueTeams = ({ id, name }) => {
     teams,
     isLoading,
     pagination,
+    isEditabled,
 
     prevPage,
     nextPage,
-    getTeamsById: ( {id, name} ) => {
+    goTeamsPlayers: ( {id, name} ) => {
       if(id) router.push({ name: 'TeamsPlayers', params: { id, name } })
     }
 

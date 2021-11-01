@@ -25,7 +25,7 @@ const useLeagues = () => {
   return {
     isLoading,
     leagues,
-    getLeagueById: ( {id, name} ) => {
+    goLeagueTeams: ( {id, name} ) => {
       if(id) router.push({ name: 'LeagueTeams', params: { id, name } })
     }
   }

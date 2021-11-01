@@ -5,18 +5,19 @@
     <h3 class="text-xs font-bold mb-3 mt-1 border-gray-300 text-yellow-400">{{ leagueName }}</h3>
     <div class="mb-2 text-center">
       <ButtonVue
+        v-if="isEditabled"
         textBtn="Editar"
         textColor="gray"
         :textColorTono=500
         bgColorHover="gray"
         :bgColorHoverTono=400
         textColorHover="white"
-        @click.self="$emit('teamSelectedId', id)"
+        @click.self="$emit('teamSelected', id)"
       />
       <ButtonVue
         :data="name"
         textBtn="Ver jugadores"
-        @click.self="$emit('getTeamsById', { id, name })"
+        @click.self="$emit('goTeamsPlayers', { id, name })"
       />
     </div>
   </div>
@@ -30,11 +31,15 @@
     name: 'Team',
     props: {
       team: {
-          type: Object,
-          required: true
+        type: Object,
+        required: true
       },
+      isEditabled: {
+        type: Boolean,
+        required: true
+      }
     },
-    emits: ["getTeamsById", "teamSelectedId"],
+    emits: ["goTeamsPlayers", "teamSelected"],
     components: {
       ButtonVue
     },

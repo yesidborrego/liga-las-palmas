@@ -63,7 +63,7 @@
               class="mx-2 md:mx-0"
               v-for="(team) in searchTeam" :key="team.id"
             >
-              <Team :team="team" @getTeamsById="getTeamsById" @teamSelectedId="teamSelectedId" />
+              <Team :team="team" @goTeamsPlayers="goTeamsPlayers" @teamSelected="teamSelected" :isEditabled="isEditabled" />
             </div>
           </template>
           <template v-else>
@@ -88,131 +88,11 @@
     searchTeam,
     leagues,
     textAction,
+    isEditabled,
 
     onSubmitTeam,
-    getTeamsById,
+    goTeamsPlayers,
     clearInputs,
-    teamSelectedId
+    teamSelected
   } = useTeams()
-
-
-
-
-  // import { v4 as uuid } from 'uuid'
-  // import spinner from "@/components/spinner.vue"
-  // import { computed, reactive, ref } from "vue"
-  // import { useRouter } from "vue-router"
-  // import laspalmasApi from "../../../api/lasPalmas"
-  // import Team from "../components/Team.vue"
-
-  // export default {
-  //   name: 'Teams',
-  //   components: {
-  //     spinner,
-  //     Team
-  //   },
-  //   setup() {
-  //     const router = useRouter()
-  //     const teams = ref([])
-  //     const leagues = ref([])
-  //     const isLoading = ref(false)
-  //     const searchQuery = ref('')
-  //     const textAction = reactive({
-  //       titleForm: 'Agregar Equipo',
-  //       btnForm: 'Agregar'
-  //     })
-  //     const teamModel = reactive({
-  //       teamId: null,
-  //       nameNewTeam: '',
-  //       logoNewTeam: 'https://robohash.org/sitautemofficiis.png?size=250x250&set=set1',
-  //       leaguesId: 0,
-  //     })
-
-  //     const getTeams = async () => {
-  //       isLoading.value = true
-  //       try {
-  //         const { data } = await laspalmasApi.get('/teams')
-  //         teams.value = data
-  //         const { data: dataLeagues } = await laspalmasApi.get('/leagues')
-  //         leagues.value = dataLeagues
-  //         isLoading.value = false
-
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
-
-  //     const searchTeam = computed(() => {
-  //       return teams.value.filter(team => {
-  //         return (
-  //             // team['Nombre del equipo'].toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
-  //             team['Nombre del equipo'].toLowerCase().includes(searchQuery.value.toLowerCase())
-  //         )
-  //       })
-  //     })
-
-  //     const onSubmitTeam = async () => {
-  //       if(teamModel.leaguesId !== 0 && teamModel.nameNewTeam) {
-  //         let payload = {
-  //           id: null,
-  //           "Nombre del equipo": teamModel.nameNewTeam,
-  //           "Logo del Equipo": teamModel.logoNewTeam,
-  //           leagueId: teamModel.leaguesId
-  //         }
-  //         try {
-  //           if(textAction.btnForm === 'Agregar') {
-  //             payload.id = uuid()
-  //             await laspalmasApi.post('/teams', payload)
-  //           } else {
-  //             payload.id = teamModel.teamId
-  //             await laspalmasApi.put(`/teams/${payload.id}`, payload)
-  //           }
-  //           getTeams()
-  //           clearInputs()
-  //         } catch (error) {
-  //           console.log(error)
-  //         }
-  //       }
-  //     }
-
-  //     const teamSelectedId = (id) => {
-  //       const data = teams.value.filter(team => {
-  //         return (team.id.toLowerCase().indexOf(id.toLowerCase()) != -1)
-  //       })[0]
-  //       teamModel.teamId = data.id
-  //       teamModel.nameNewTeam = data['Nombre del equipo']
-  //       teamModel.logoNewTeam = data['Logo del Equipo']
-  //       teamModel.leaguesId = data.leagueId
-  //       textAction.titleForm = "Editar Equipo"
-  //       textAction.btnForm = 'Editar'
-  //     }
-
-  //     const clearInputs = () => {
-  //         teamModel.nameNewTeam = ''
-  //         teamModel.leaguesId = 0,
-  //         teamModel.logoNewTeam = 'https://robohash.org/sitautemofficiis.png?size=250x250&set=set1'
-  //         teamModel.teamId = 0
-  //         textAction.titleForm = "Agregar Equipo"
-  //         textAction.btnForm = 'Agregar'
-  //       }
-
-  //     getTeams()
-
-  //     return {
-  //       teamModel,
-  //       isLoading,
-  //       searchQuery,
-  //       searchTeam,
-  //       leagues,
-  //       textAction,
-
-  //       onSubmitTeam,
-  //       getTeamsById: ({ id, name }) => {
-  //         if(id) router.push({ name: 'TeamsPlayers', params: { id, name } })
-  //       },
-  //       clearInputs,
-  //       teamSelectedId
-  //     }
-  //   }
-  // }
 </script>

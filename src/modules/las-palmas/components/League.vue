@@ -6,7 +6,7 @@
       <ButtonVue
         :data="name"
         textBtn="Ver equipos"
-        @click.self="$emit('getLeagueById', { id, name })"
+        @click.self="$emit('goLeagueTeams', { id, name })"
       />
     </div>
   </div>
@@ -24,7 +24,7 @@
           required: true
       },
     },
-    emits: ["getLeagueById"],
+    emits: ["goLeagueTeams"],
     components: {
       ButtonVue
     },

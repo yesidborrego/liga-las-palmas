@@ -6,8 +6,7 @@
             class="mx-3"
             v-for="(player) in players" :key="player.id"
           >
-            <Player :player="player" />
-            <!-- <Player :player="player" @getLeagueById="getLeagueById"/> -->
+            <Player :player="player" :isEditabled=false />
           </div>
         </template>
         <template v-else>
@@ -16,12 +15,12 @@
           </div>
         </template>
       </div>
-      <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" />
+      <Pagination @prevPage="prevPage" @nextPage="nextPage" :page="pagination.page" :totalPage="pagination.totalPage" />
 </template>
 
 <script>
   import spinner from "@/components/spinner.vue"
-  import { reactive, ref } from "vue"
+  import { onMounted, reactive, ref } from "vue"
   import laspalmasApi from "@/api/lasPalmas"
   import Player from "../components/Player.vue"
   import Pagination from "../components/Pagination.vue"
@@ -50,7 +49,8 @@
       const nameTeam = ref(null)
       const pagination = reactive({
         page: 1,
-        limit: 5
+        limit: 6,
+        totalPage: 2
       })
 
       const getPlayers = async () => {
@@ -64,6 +64,9 @@
           nameTeam.value = props.name
         }
         const { data } = await laspalmasApi.get(`/teams/${idTeam.value}/players?_limit=${pagination.limit}&_page=${pagination.page}`)
+        data.map(player => {
+          return player.teamName = nameTeam
+        })
         players.value = data
         isLoading.value = false
       }
@@ -76,13 +79,15 @@
       }
 
       const nextPage = () => {
-          if (pagination.page !== 3) {
-            pagination.page = pagination.page + 1
-            getPlayers()
-          }
+        if (pagination.page < pagination.totalPage) {
+          pagination.page = pagination.page + 1
+          getPlayers()
+        }
       }
 
-      getPlayers()
+      onMounted(() => {
+        getPlayers()
+      })
 
       return {
         nameTeam,

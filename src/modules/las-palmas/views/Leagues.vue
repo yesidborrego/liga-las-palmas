@@ -6,7 +6,7 @@
         class="mx-3"
         v-for="(league) in leagues" :key="league.id"
       >
-        <League :league="league" @getLeagueById="getLeagueById"/>
+        <League :league="league" @goLeagueTeams="goLeagueTeams"/>
       </div>
     </template>
     <template v-else>
@@ -25,6 +25,6 @@
   const {
     isLoading,
     leagues,
-    getLeagueById
+    goLeagueTeams
   } = useLeagues()
 </script>

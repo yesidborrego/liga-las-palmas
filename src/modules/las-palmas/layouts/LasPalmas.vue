@@ -1,8 +1,11 @@
 <template>
-  <Navbar />
-  <div class="md:container md:mx-auto">
+  <header>
+    <Navbar />
+  </header>
+
+  <main class="md:container md:mx-auto">
     <router-view/>
-  </div>
+  </main>
 </template>
 
 <script>
